@@ -34,6 +34,6 @@ public class Main {
 
 
         PassengerDaoImpl passengerDao = new PassengerDaoImpl(new ConnectionHelper());
-        System.out.println(passengerDao.getById(3L));
+        System.out.println(passengerDao.getAllByFlightId(2L));
     }
 }

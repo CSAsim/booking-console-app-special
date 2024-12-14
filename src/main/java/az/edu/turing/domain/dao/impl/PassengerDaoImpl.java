@@ -148,7 +148,7 @@ public class PassengerDaoImpl extends PassengerDao {
     }
 
     @Override
-    public PassengerEntity update(PassengerEntity passengerEntity) {
+    public PassengerEntity update(Long id, PassengerEntity passengerEntity) {
         Connection connection = connectionHelper.getConnection();
         String queryUpdate = """
                 UPDATE passengers SET name = ?, surname = ?, email = ?, phone_number = ?, updated_at = ?
@@ -162,7 +162,7 @@ public class PassengerDaoImpl extends PassengerDao {
             preparedStatement.setString(3, passengerEntity.getEmail());
             preparedStatement.setString(4, passengerEntity.getPhoneNumber());
             preparedStatement.setTimestamp(5,Timestamp.valueOf(LocalDateTime.now()));
-            preparedStatement.setLong(6, passengerEntity.getId());
+            preparedStatement.setLong(6, id);
             preparedStatement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
@@ -220,5 +220,50 @@ public class PassengerDaoImpl extends PassengerDao {
             throw new RuntimeException(e);
         }
         return passengerEntity;
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        Connection connection = connectionHelper.getConnection();
+        String querySelect = """
+                SELECT p.id AS passenger_id, p.created_at AS p_created_at,
+                p.updated_at AS p_updated_at,
+                p.* FROM passengers p WHERE p.email = ?;
+                """;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(querySelect)){
+            preparedStatement.setString(1, email);
+            preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.getResultSet();
+            connection.close();
+            return resultSet.next();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public Collection<PassengerEntity> getAllByFlightId(Long flightId) {
+        Connection connection = connectionHelper.getConnection();
+        String selectQuery = """
+                SELECT p.id         as passenger_id,
+                       p.updated_at as p_updated_at,
+                       p.created_at as p_created_at,
+                       p.*
+                FROM passengers p
+                         INNER JOIN public.bookings b on p.id = b.passenger_id
+                    AND b.flight_id = ?;
+                """;
+        List<PassengerEntity> passengers = new ArrayList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(selectQuery)) {
+            preparedStatement.setLong(1, flightId);
+            preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.getResultSet();
+            while (resultSet.next()) {
+                passengers.add(EntityUtil.getPassengerInfo(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return passengers;
     }
 }

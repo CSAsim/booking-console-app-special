@@ -1,39 +1,36 @@
 package az.edu.turing.model.dto.request.booking;
 
-import az.edu.turing.model.dto.request.passenger.CreatePassengerRequest;
-
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class CreateBookingRequest {
 
-    private final String flightNumber;
-    private final List<CreatePassengerRequest> passengers;
+    private final long flightId;
+    private final long passengerId;
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
 
     public CreateBookingRequest(CreateBookingRequestBuilder builder) {
-        this.flightNumber = builder.flightNumber;
-        this.passengers = builder.passengers;
+        this.flightId = builder.flightId;
+        this.passengerId = builder.passengerId;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
 
     public static class CreateBookingRequestBuilder {
-        private String flightNumber;
-        private List<CreatePassengerRequest> passengers;
+        private long flightId;
+        private long passengerId;;
 
         public static CreateBookingRequestBuilder builder(){
             return new CreateBookingRequestBuilder();
         }
 
-        public CreateBookingRequestBuilder flight(String flightNumber) {
-            this.flightNumber = flightNumber;
+        public CreateBookingRequestBuilder flightId(long flightId) {
+            this.flightId = flightId;
             return this;
         }
 
-        public CreateBookingRequestBuilder passengers(List<CreatePassengerRequest> passengers) {
-            this.passengers = passengers;
+        public CreateBookingRequestBuilder passengers(long passengerId) {
+            this.passengerId = passengerId;
             return this;
         }
 
@@ -42,12 +39,12 @@ public class CreateBookingRequest {
         }
     }
 
-    public String getFlightNumber() {
-        return flightNumber;
+    public long getFlightId() {
+        return flightId;
     }
 
-    public List<CreatePassengerRequest> getPassengers() {
-        return passengers;
+    public long getPassengerId() {
+        return passengerId;
     }
 
     public LocalDateTime getCreatedAt() {

@@ -211,7 +211,7 @@ public class FlightDaoImpl extends FlightDao {
     }
 
     @Override
-    public FlightEntity update(FlightEntity flightEntity) {
+    public FlightEntity update(Long id, FlightEntity flightEntity) {
         Connection connection = connectionHelper.getConnection();
 
         String queryUpdate = """
@@ -234,7 +234,7 @@ public class FlightDaoImpl extends FlightDao {
             preparedStatement.setInt(5, flightEntity.getAvailableSeats());
             preparedStatement.setString(6, flightEntity.getFlightStatus().toString());
             preparedStatement.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
-            preparedStatement.setLong(8, flightEntity.getId());
+            preparedStatement.setLong(8, id);
             preparedStatement.executeUpdate();
             connection.commit();
             connection.close();

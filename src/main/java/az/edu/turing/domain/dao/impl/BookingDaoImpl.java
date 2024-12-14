@@ -184,7 +184,7 @@ public class BookingDaoImpl extends BookingDao {
     }
 
     @Override
-    public BookingEntity update(BookingEntity bookingEntity) {
+    public BookingEntity update(Long id,BookingEntity bookingEntity) {
         Connection connection = connectionHelper.getConnection();
         String updateQuery = """
                     UPDATE bookings SET
@@ -200,7 +200,7 @@ public class BookingDaoImpl extends BookingDao {
             preparedStatement.setLong(2, bookingEntity.getPassenger().getId());
             preparedStatement.setLong(3, bookingEntity.getPassenger().getId());
             preparedStatement.setTimestamp(4, Timestamp.valueOf(bookingEntity.getUpdatedAt()));
-            preparedStatement.setLong(5, bookingEntity.getId());
+            preparedStatement.setLong(5, id);
             preparedStatement.executeUpdate();
             connection.commit();
             preparedStatement.close();

@@ -10,7 +10,7 @@ public class BookingDto {
     private FlightDto flight;
     private PassengerDto passenger;
     private StatusMessage bookingStatus;
-    private Double totalAmount;
+    private double totalAmount;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -57,7 +57,7 @@ public class BookingDto {
             return this;
         }
 
-        public BookingDtoBuilder totalAmount(Double totalAmount) {
+        public BookingDtoBuilder totalAmount(double totalAmount) {
             this.totalAmount = totalAmount;
             return this;
         }
@@ -109,7 +109,7 @@ public class BookingDto {
         this.bookingStatus = bookingStatus;
     }
 
-    public Double getTotalAmount() {
+    public double getTotalAmount() {
         return totalAmount;
     }
 

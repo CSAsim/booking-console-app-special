@@ -13,7 +13,7 @@ public interface Dao <E, T>{
 
     E deleteById(T id);
 
-    E update(E e);
+    E update(T id,E e);
 
     boolean existsById(T id);
 }

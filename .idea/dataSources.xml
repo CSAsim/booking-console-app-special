@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="booking-console-app@localhost" uuid="99b7873d-4a52-4796-bc80-ca96c62ac286">
+    <data-source source="LOCAL" name="booking-console-app@localhost" uuid="78d9b369-78fd-4c7c-b438-69781506192b">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>

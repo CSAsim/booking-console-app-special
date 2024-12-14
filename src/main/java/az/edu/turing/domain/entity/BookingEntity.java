@@ -15,7 +15,7 @@ public class BookingEntity {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    private BookingEntity() {
+    public BookingEntity() {
     }
 
     public BookingEntity(BookingEntityBuilder builder) {
@@ -27,6 +27,7 @@ public class BookingEntity {
         this.createdAt = builder.createdAt;
         this.updatedAt = builder.updatedAt;
     }
+
 
     public BookingEntity(Long id, FlightEntity flight, PassengerEntity passenger, StatusMessage bookingState,
                          Double totalAmount, LocalDateTime createdAt, LocalDateTime updatedAt) {
@@ -98,28 +99,56 @@ public class BookingEntity {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public FlightEntity getFlight() {
         return flight;
+    }
+
+    public void setFlight(FlightEntity flight) {
+        this.flight = flight;
     }
 
     public PassengerEntity getPassenger() {
         return passenger;
     }
 
+    public void setPassenger(PassengerEntity passenger) {
+        this.passenger = passenger;
+    }
+
     public StatusMessage getBookingStatus() {
         return bookingStatus;
+    }
+
+    public void setBookingStatus(StatusMessage bookingStatus) {
+        this.bookingStatus = bookingStatus;
     }
 
     public Double getTotalAmount() {
         return totalAmount;
     }
 
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override

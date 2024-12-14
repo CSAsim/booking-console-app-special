@@ -9,8 +9,9 @@ import java.util.List;
 public interface PassengerService {
 
     PassengerDto createPassenger(CreatePassengerRequest request);
+    List<PassengerDto> getAll();
     PassengerDto getPassenger(long id);
     PassengerDto updatePassenger(long id, UpdatePassengerRequest request);
     void deletePassenger(long id);
-    List<PassengerDto> getAllPassengers();
+    List<PassengerDto> getAllByFlightId(long flightId);
 }

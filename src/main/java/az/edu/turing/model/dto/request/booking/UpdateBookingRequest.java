@@ -1,23 +1,21 @@
 package az.edu.turing.model.dto.request.booking;
 
 import az.edu.turing.enums.StatusMessage;
-import az.edu.turing.model.dto.request.passenger.UpdatePassengerRequest;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class UpdateBookingRequest {
 
     private final long id;
     private final String flightNumber;
-    private final List<UpdatePassengerRequest> passengers;
+    private final long passengerId;
     private final StatusMessage bookingStatus;
     private final LocalDateTime updatedAt;
 
     public UpdateBookingRequest(UpdateBookingRequestBuilder builder) {
         this.id = builder.id;
         this.flightNumber = builder.flightNumber;
-        this.passengers = builder.passengers;
+        this.passengerId = builder.passengerId;
         this.bookingStatus = builder.bookingStatus;
         this.updatedAt = LocalDateTime.now();
     }
@@ -26,7 +24,7 @@ public class UpdateBookingRequest {
 
         private long id;
         private String flightNumber;
-        private List<UpdatePassengerRequest> passengers;
+        private long passengerId;
         private StatusMessage bookingStatus;
 
         public static UpdateBookingRequestBuilder builder() {
@@ -43,8 +41,8 @@ public class UpdateBookingRequest {
             return this;
         }
 
-        public UpdateBookingRequestBuilder passengers(List<UpdatePassengerRequest> passengers) {
-            this.passengers = passengers;
+        public UpdateBookingRequestBuilder passengers(long passengerId) {
+            this.passengerId = passengerId;
             return this;
         }
 
@@ -66,8 +64,8 @@ public class UpdateBookingRequest {
         return flightNumber;
     }
 
-    public List<UpdatePassengerRequest> getPassengers() {
-        return passengers;
+    public long getPassengerId() {
+        return passengerId;
     }
 
     public StatusMessage getBookingStatus() {
