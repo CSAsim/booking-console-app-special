@@ -225,8 +225,9 @@ public class BookingDaoImpl extends BookingDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
             preparedStatement.setLong(1, id);
+            preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getResultSet();
-            return resultSet.isFirst();
+            return resultSet.next();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
